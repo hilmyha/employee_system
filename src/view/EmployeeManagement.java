@@ -47,10 +47,10 @@ public class EmployeeManagement extends JFrame {
 
 
 
-    public static void main(String[] args) {
-        JFrame eMS = new EmployeeManagement();
-        eMS.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        JFrame eMS = new EmployeeManagement();
+//        eMS.setVisible(true);
+//    }
 
     public EmployeeManagement() {
         super("Employee Management System");

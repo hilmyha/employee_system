@@ -22,10 +22,10 @@ public class LoginForm extends JFrame {
     }
 
     public LoginForm() {
-        super("Employee Management System");
+        super("Login");
         this.setContentPane(mainPanel);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1200, 650);
+        this.setSize(200, 300);
         this.setLocationRelativeTo(null);
 
 
