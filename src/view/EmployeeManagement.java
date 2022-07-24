@@ -48,8 +48,8 @@ public class EmployeeManagement extends JFrame {
 
 
     public static void main(String[] args) {
-        JFrame loginForm = new EmployeeManagement();
-        loginForm.setVisible(true);
+        JFrame eMS = new EmployeeManagement();
+        eMS.setVisible(true);
     }
 
     public EmployeeManagement() {

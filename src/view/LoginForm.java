@@ -44,6 +44,8 @@ public class LoginForm extends JFrame {
                     if (adminDao.loginGet(admin) == true) {
                         JOptionPane.showMessageDialog(mainPanel, "Login berhasil");
                         this.dispose();
+                        JFrame eMS = new EmployeeManagement();
+                        eMS.setVisible(true);
                     } else {
                         resetLoginForm();
                         JOptionPane.showMessageDialog(mainPanel, "Login gagal");
