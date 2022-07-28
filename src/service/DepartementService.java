@@ -7,4 +7,5 @@ public interface DepartementService<D> {
     List<D> fetchAll() throws SQLException, ClassNotFoundException;
 
     boolean addDept(D d) throws SQLException, ClassNotFoundException;
+
 }

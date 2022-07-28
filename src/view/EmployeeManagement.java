@@ -1,9 +1,11 @@
 package view;
 
 import dao.DepartementDao;
+import dao.GajiDao;
 import dao.PegawaiDao;
 import entity.Departement;
 import entity.Pegawai;
+import table.GajiTableModel;
 import table.PegawaiTableModel;
 
 import javax.swing.*;
@@ -27,13 +29,18 @@ public class EmployeeManagement extends JFrame {
     private JComboBox cbDept;
     private JButton addDepartementButton;
     private JTable tabelPegawai;
-    private JTextField tfSearchId;
-    private JTextField tfHonor;
-    private JTextField tfAllowance;
-    private JTextField tfLembur;
+    private JTextField searchFirstName;
+    private JTextField searchLastName;
+    private JTextField searchDept;
+    private JTable tableGaji;
+    private JTextField searchId;
+    private JTextField tfIdAbsen;
+    private JButton absenButton;
     private JButton hitungButton;
-    private JButton searchButton;
-    private JTable table1;
+    private JTextField hitungGajiFname;
+    private JTextField hitungGajiLname;
+    private JTextField hitungGajiDept;
+    private JTextField hitungGajiBersih;
 
     private DepartementDao departementDao;
     private List<Departement> departements;
@@ -44,8 +51,10 @@ public class EmployeeManagement extends JFrame {
 
     private PegawaiTableModel pegawaiTableModel;
     private Pegawai selectedPegawai;
+    private Pegawai hitungGajiPegawai;
 
-
+    private GajiDao gajiDao;
+    private GajiTableModel gajiTableModel;
 
 //    public static void main(String[] args) {
 //        JFrame eMS = new EmployeeManagement();
@@ -64,6 +73,8 @@ public class EmployeeManagement extends JFrame {
         departements = new ArrayList<>();
         pegawaiDao = new PegawaiDao();
         pegawais = new ArrayList<>();
+        gajiDao = new GajiDao();
+
 
         try {
             departements.addAll(departementDao.fetchAll());
@@ -78,18 +89,24 @@ public class EmployeeManagement extends JFrame {
         tabelPegawai.setModel(pegawaiTableModel);
         tabelPegawai.setAutoCreateRowSorter(true);
 
+//        gajiTableModel = new GajiTableModel(pegawais);
+//        tableGaji.setModel(pegawaiTableModel);
+//        tableGaji.setAutoCreateRowSorter(true);
+
 
         addDepartementButton.addActionListener(e -> {
             String newDept = JOptionPane.showInputDialog(mainPanel, "New Departement");
-            String newHonor = JOptionPane.showInputDialog(mainPanel, "New Honor");
-            String newAllowance = JOptionPane.showInputDialog(mainPanel, "New Allowance");
+            String newHonor = JOptionPane.showInputDialog(mainPanel, "Honor");
+            String newAllowance = JOptionPane.showInputDialog(mainPanel, "Allowance");
+            String newTransport = JOptionPane.showInputDialog(mainPanel, "Transport");
             if (
-                    newDept != null && !newDept.trim().isEmpty() || newHonor != null && !newHonor.trim().isEmpty() || newAllowance != null && !newAllowance.trim().isEmpty()
+                    newDept != null && !newDept.trim().isEmpty() || newHonor != null && !newHonor.trim().isEmpty() || newAllowance != null && !newAllowance.trim().isEmpty() || newTransport != null && !newTransport.trim().isEmpty()
             ) {
                 Departement departement = new Departement();
                 departement.setName(newDept);
                 departement.setHonor(Integer.parseInt(newHonor));
                 departement.setAllowance(Integer.parseInt(newAllowance));
+                departement.setTransport(Integer.parseInt(newTransport));
                 try {
                     if (departementDao.addDept(departement) == true) {
                         departements.clear();
@@ -185,6 +202,60 @@ public class EmployeeManagement extends JFrame {
                }
            }
         });
+//        tableGaji.getSelectionModel().addListSelectionListener(e -> {
+//            if (!tableGaji.getSelectionModel().isSelectionEmpty()) {
+//                int selectedIndex = tableGaji.convertRowIndexToModel(tableGaji.getSelectedRow());
+//                hitungGajiPegawai = pegawais.get(selectedIndex);
+//                if (hitungGajiPegawai != null) {
+//                    searchId.setText(hitungGajiPegawai.getId_pegawai());
+//                    searchFirstName.setText(hitungGajiPegawai.getFirst_name());
+//                    searchLastName.setText(hitungGajiPegawai.getLast_name());
+//                    searchDept.setText(hitungGajiPegawai.getDepartement().getName());
+//                }
+//            }
+//        });
+
+        absenButton.addActionListener(e -> {
+            if (
+                    tfIdAbsen.getText().trim().isEmpty()
+            ) {
+                JOptionPane.showMessageDialog(mainPanel, "Masukkan ID", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Pegawai pegawai = new Pegawai();
+                pegawai.setId_pegawai(tfIdAbsen.getText());
+                try {
+                    if (gajiDao.absensi(pegawai) == true) {
+                        pegawais.clear();
+                        pegawais.addAll(pegawaiDao.fetchAll());
+                        JOptionPane.showMessageDialog(mainPanel, "Sukses Absensi", "Sucess", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } catch (SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        hitungButton.addActionListener(e -> {
+            if (
+                    searchId.getText().trim().isEmpty()
+            ) {
+                JOptionPane.showMessageDialog(mainPanel, "Cari ID", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Pegawai pegawai = new Pegawai();
+                pegawai.setId_pegawai(searchId.getText());
+                try {
+                    if (gajiDao.hitungGaji(pegawai) == true) {
+                        hitungGajiFname.setText(pegawai.getFirst_name());
+                        hitungGajiLname.setText(pegawai.getLast_name());
+//                        hitungGajiDept.setText(pegawai.getDepartement().getName());
+                         hitungGajiBersih.setText(gajiDao.getTotal());
+                        System.out.println("SQL OK");
+                    }
+                } catch (SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
     }
 
     private void clearAndReset() {
@@ -198,4 +269,7 @@ public class EmployeeManagement extends JFrame {
         tabelPegawai.clearSelection();
         selectedPegawai = null;
     }
+
+
+
 }

@@ -5,15 +5,17 @@ public class Departement {
     private String name;
     private int honor;
     private int allowance;
+    private int transport;
 
     public Departement() {
     }
 
-    public Departement(int id, String name, int honor, int allowance) {
+    public Departement(int id, String name, int honor, int allowance, int transport) {
         this.id = id;
         this.name = name;
         this.honor = honor;
         this.allowance = allowance;
+        this.transport = transport;
     }
 
     public int getId() {
@@ -46,6 +48,14 @@ public class Departement {
 
     public void setAllowance(int allowance) {
         this.allowance = allowance;
+    }
+
+    public int getTransport() {
+        return transport;
+    }
+
+    public void setTransport(int transport) {
+        this.transport = transport;
     }
 
     @Override

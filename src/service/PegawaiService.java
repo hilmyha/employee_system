@@ -11,4 +11,5 @@ public interface PegawaiService<P> {
     boolean updatePegawai(P p) throws SQLException, ClassNotFoundException;
 
     boolean deletePegawai(P p) throws SQLException, ClassNotFoundException;
+
 }

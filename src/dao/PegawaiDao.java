@@ -16,7 +16,7 @@ public class PegawaiDao implements PegawaiService<Pegawai> {
     @Override
     public List<Pegawai> fetchAll() throws SQLException, ClassNotFoundException {
         List<Pegawai> pegawais = new ArrayList<>();
-        String query = "SELECT s.id_pegawai, first_name, last_name, address, departement_id, dept_name, honor, allowance FROM pegawai s JOIN departement d on d.id_dept = s.departement_id";
+        String query = "SELECT p.id_pegawai, first_name, last_name, address, departement_id, dept_name, honor, allowance FROM pegawai p JOIN departement d on d.id_dept = p.departement_id";
         try (Connection connection = MySQL.createConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 try (ResultSet rs = ps.executeQuery()) {
@@ -103,4 +103,6 @@ public class PegawaiDao implements PegawaiService<Pegawai> {
         }
         return result;
     }
+
+
 }
