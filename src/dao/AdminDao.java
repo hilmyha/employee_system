@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Hilmy Ahmad Haidar. All Right Reserved.
+ */
+
 package dao;
 
 import database.MySQL;
@@ -8,8 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AdminDao implements AdminService<Admin> {
     @Override

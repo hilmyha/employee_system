@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Hilmy Ahmad Haidar. All Right Reserved.
+ */
+
 package view;
 
 import dao.DepartementDao;
@@ -243,11 +247,11 @@ public class EmployeeManagement extends JFrame {
                 Pegawai pegawai = new Pegawai();
                 pegawai.setId_pegawai(searchId.getText());
                 try {
-                    if (gajiDao.hitungGaji(pegawai) == true) {
-                        hitungGajiFname.setText(pegawai.getFirst_name());
-                        hitungGajiLname.setText(pegawai.getLast_name());
-//                        hitungGajiDept.setText(pegawai.getDepartement().getName());
-                         hitungGajiBersih.setText(gajiDao.getTotal());
+                    if (gajiDao.gajiBersih(pegawai) != 0) {
+                        hitungGajiFname.setText(String.valueOf(pegawai.getFirst_name()));
+                        hitungGajiLname.setText(String.valueOf(pegawai.getLast_name()));
+                        hitungGajiDept.setText(pegawai.getDepartement().getName());
+                        hitungGajiBersih.setText(String.valueOf(pegawai.getGaji_bersih()));
                         System.out.println("SQL OK");
                     }
                 } catch (SQLException | ClassNotFoundException ex) {
@@ -255,7 +259,7 @@ public class EmployeeManagement extends JFrame {
                 }
             }
         });
-
+//
     }
 
     private void clearAndReset() {

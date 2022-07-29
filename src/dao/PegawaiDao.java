@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Hilmy Ahmad Haidar. All Right Reserved.
+ */
+
 package dao;
 
 import database.MySQL;
@@ -45,7 +49,7 @@ public class PegawaiDao implements PegawaiService<Pegawai> {
     @Override
     public boolean addPegawai(Pegawai pegawai) throws SQLException, ClassNotFoundException {
         boolean result = false;
-        String query = "INSERT INTO pegawai(id_pegawai, first_name, last_name, address, departement_id) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO pegawai(id_pegawai, first_name, last_name, address, departement_id, absen) VALUES (?, ?, ?, ?, ?, 1)";
         try (Connection connection = MySQL.createConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, pegawai.getId_pegawai());

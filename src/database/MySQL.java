@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Hilmy Ahmad Haidar. All Right Reserved.
+ */
+
 package database;
 
 import java.sql.Connection;
