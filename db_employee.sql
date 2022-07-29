@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2022 at 12:08 PM
+-- Generation Time: Jul 29, 2022 at 06:21 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -31,23 +31,17 @@ CREATE TABLE `departement` (
   `id_dept` int(11) NOT NULL,
   `dept_name` varchar(12) NOT NULL,
   `honor` int(16) NOT NULL,
-  `allowance` int(16) NOT NULL
+  `allowance` int(16) NOT NULL,
+  `transport` int(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `departement`
 --
 
-INSERT INTO `departement` (`id_dept`, `dept_name`, `honor`, `allowance`) VALUES
-(1, 'Chief Store', 2000000, 500000),
-(2, 'Kasir', 1800000, 500000),
-(3, 'Gudang', 1200000, 300000),
-(4, 'TesDept1', 1000000, 100000),
-(6, 'TestDept2', 1000000, 100000),
-(8, 'tes3', 12, 12),
-(10, 'tes4', 100, 100),
-(11, 'tes5', 199, 199),
-(12, 'tes6', 100, 100);
+INSERT INTO `departement` (`id_dept`, `dept_name`, `honor`, `allowance`, `transport`) VALUES
+(17, 'Chief Store', 3000000, 500000, 20000),
+(18, 'Kasir', 2000000, 300000, 15000);
 
 -- --------------------------------------------------------
 
@@ -60,15 +54,18 @@ CREATE TABLE `pegawai` (
   `first_name` varchar(12) NOT NULL,
   `last_name` varchar(12) NOT NULL,
   `address` varchar(300) NOT NULL,
-  `departement_id` int(11) NOT NULL
+  `departement_id` int(11) NOT NULL,
+  `absen` int(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id_pegawai`, `first_name`, `last_name`, `address`, `departement_id`) VALUES
-('CS001', 'Teguh', 'Widiyanto', 'Bekasi', 1);
+INSERT INTO `pegawai` (`id_pegawai`, `first_name`, `last_name`, `address`, `departement_id`, `absen`) VALUES
+('CS001', 'Teguh', 'Syahputra', 'Bekasi', 17, 6),
+('CS002', 'Diana', 'Yuliana', 'Bandung', 18, 4),
+('CS003', 'Ridho', 'Nugraha', 'Bekasi', 18, 5);
 
 -- --------------------------------------------------------
 
@@ -119,7 +116,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `departement`
 --
 ALTER TABLE `departement`
-  MODIFY `id_dept` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_dept` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
