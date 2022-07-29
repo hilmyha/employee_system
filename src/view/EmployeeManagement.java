@@ -259,7 +259,6 @@ public class EmployeeManagement extends JFrame {
                 }
             }
         });
-//
     }
 
     private void clearAndReset() {
