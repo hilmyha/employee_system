@@ -12,14 +12,11 @@ import java.util.List;
 public class GajiTableModel extends AbstractTableModel {
     private List<Pegawai> pegawais;
     private final String[] COLUMNS = {
-            "ID",
-            "FIRST NAME",
-            "LAST NAME",
+            "ID PEGAWAI",
             "DEPARTEMENT",
             "HONOR",
             "ALLOWANCE",
-            "ABSEN",
-            "GAJI BERSIH"
+            "TRANSPORT"
     };
 
     public GajiTableModel(List<Pegawai> pegawais) {
@@ -39,14 +36,11 @@ public class GajiTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         return switch (columnIndex) {
-            case 0 -> pegawais.get(rowIndex).getDepartement().getId();
-            case 1 -> pegawais.get(rowIndex).getFirst_name();
-            case 2 -> pegawais.get(rowIndex).getLast_name();
-            case 3 -> pegawais.get(rowIndex).getDepartement().getName();
-            case 4 -> pegawais.get(rowIndex).getDepartement().getHonor();
-            case 5 -> pegawais.get(rowIndex).getDepartement().getAllowance();
-            case 6 -> pegawais.get(rowIndex).getAbsen();
-            case 7 -> pegawais.get(rowIndex).getGaji_bersih();
+            case 0 -> pegawais.get(rowIndex).getId_pegawai();
+            case 1 -> pegawais.get(rowIndex).getDepartement().getName();
+            case 2 -> pegawais.get(rowIndex).getDepartement().getHonor();
+            case 3 -> pegawais.get(rowIndex).getDepartement().getAllowance();
+            case 4 -> pegawais.get(rowIndex).getDepartement().getTransport();
             default -> " ";
         };
     }

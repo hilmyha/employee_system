@@ -20,10 +20,7 @@ public class LoginForm extends JFrame {
 
     private AdminDao adminDao;
 
-    public static void main(String[] args) {
-        JFrame loginForm = new LoginForm();
-        loginForm.setVisible(true);
-    }
+
 
     public LoginForm() {
         super("Login");
@@ -31,7 +28,6 @@ public class LoginForm extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(200, 300);
         this.setLocationRelativeTo(null);
-
 
         adminDao = new AdminDao();
 
@@ -59,7 +55,6 @@ public class LoginForm extends JFrame {
                 }
             }
         });
-
     }
 
     private void resetLoginForm() {

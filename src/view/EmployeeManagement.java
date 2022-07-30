@@ -9,10 +9,12 @@ import dao.GajiDao;
 import dao.PegawaiDao;
 import entity.Departement;
 import entity.Pegawai;
+import table.AbsensiTableModel;
 import table.GajiTableModel;
 import table.PegawaiTableModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -45,6 +47,12 @@ public class EmployeeManagement extends JFrame {
     private JTextField hitungGajiLname;
     private JTextField hitungGajiDept;
     private JTextField hitungGajiBersih;
+    private JTable absensiTable;
+    private JScrollPane pegawaiJscroll;
+    private JScrollPane absenJscroll;
+    private JScrollPane hitungJscroll;
+    private JButton clearButton1;
+    private JButton clearButton2;
 
     private DepartementDao departementDao;
     private List<Departement> departements;
@@ -59,6 +67,7 @@ public class EmployeeManagement extends JFrame {
 
     private GajiDao gajiDao;
     private GajiTableModel gajiTableModel;
+    private AbsensiTableModel absensiTableModel;
 
 //    public static void main(String[] args) {
 //        JFrame eMS = new EmployeeManagement();
@@ -69,9 +78,8 @@ public class EmployeeManagement extends JFrame {
         super("Employee Management System");
         this.setContentPane(mainPanel);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1200, 650);
+        this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
-
 
         departementDao = new DepartementDao();
         departements = new ArrayList<>();
@@ -79,7 +87,9 @@ public class EmployeeManagement extends JFrame {
         pegawais = new ArrayList<>();
         gajiDao = new GajiDao();
 
-
+        pegawaiJscroll.setPreferredSize(new Dimension(500, 50));
+        absenJscroll.setPreferredSize(new Dimension(500, 20));
+        hitungJscroll.setPreferredSize(new Dimension(500, 100));
         try {
             departements.addAll(departementDao.fetchAll());
             pegawais.addAll(pegawaiDao.fetchAll());
@@ -93,10 +103,13 @@ public class EmployeeManagement extends JFrame {
         tabelPegawai.setModel(pegawaiTableModel);
         tabelPegawai.setAutoCreateRowSorter(true);
 
-//        gajiTableModel = new GajiTableModel(pegawais);
-//        tableGaji.setModel(pegawaiTableModel);
-//        tableGaji.setAutoCreateRowSorter(true);
+        gajiTableModel = new GajiTableModel(pegawais);
+        tableGaji.setModel(gajiTableModel);
+        tableGaji.setAutoCreateRowSorter(true);
 
+        absensiTableModel = new AbsensiTableModel(pegawais);
+        absensiTable.setModel(absensiTableModel);
+        absensiTable.setAutoCreateRowSorter(true);
 
         addDepartementButton.addActionListener(e -> {
             String newDept = JOptionPane.showInputDialog(mainPanel, "New Departement");
@@ -231,6 +244,8 @@ public class EmployeeManagement extends JFrame {
                     if (gajiDao.absensi(pegawai) == true) {
                         pegawais.clear();
                         pegawais.addAll(pegawaiDao.fetchAll());
+                        absensiTableModel.fireTableDataChanged();
+                        clearAbsen();
                         JOptionPane.showMessageDialog(mainPanel, "Sukses Absensi", "Sucess", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } catch (SQLException | ClassNotFoundException ex) {
@@ -259,6 +274,12 @@ public class EmployeeManagement extends JFrame {
                 }
             }
         });
+        clearButton2.addActionListener(e -> {
+            clearAbsen();
+        });
+        clearButton1.addActionListener(e -> {
+            clearHitungGaji();
+        });
     }
 
     private void clearAndReset() {
@@ -272,7 +293,15 @@ public class EmployeeManagement extends JFrame {
         tabelPegawai.clearSelection();
         selectedPegawai = null;
     }
-
-
-
+    private void clearAbsen() {
+        tfIdAbsen.setText("");
+        absensiTable.clearSelection();
+    }
+    private void clearHitungGaji() {
+        searchId.setText("");
+        hitungGajiFname.setText("");
+        hitungGajiLname.setText("");
+        hitungGajiDept.setText("");
+        hitungGajiBersih.setText(" ");
+    }
 }

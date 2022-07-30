@@ -20,7 +20,7 @@ public class PegawaiDao implements PegawaiService<Pegawai> {
     @Override
     public List<Pegawai> fetchAll() throws SQLException, ClassNotFoundException {
         List<Pegawai> pegawais = new ArrayList<>();
-        String query = "SELECT p.id_pegawai, first_name, last_name, address, departement_id, dept_name, honor, allowance FROM pegawai p JOIN departement d on d.id_dept = p.departement_id";
+        String query = "SELECT p.id_pegawai, first_name, last_name, address, absen, departement_id, dept_name, honor, allowance, transport FROM pegawai p JOIN departement d on d.id_dept = p.departement_id";
         try (Connection connection = MySQL.createConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 try (ResultSet rs = ps.executeQuery()) {
@@ -30,12 +30,14 @@ public class PegawaiDao implements PegawaiService<Pegawai> {
                         departement.setName(rs.getString("dept_name"));
                         departement.setHonor(rs.getInt("honor"));
                         departement.setAllowance(rs.getInt("allowance"));
+                        departement.setTransport(rs.getInt("transport"));
 
                         Pegawai pegawai = new Pegawai();
                         pegawai.setId_pegawai(rs.getString("id_pegawai"));
                         pegawai.setFirst_name(rs.getString("first_name"));
                         pegawai.setLast_name(rs.getString("last_name"));
                         pegawai.setAddress(rs.getString("address"));
+                        pegawai.setAbsen(rs.getInt("absen"));
                         pegawai.setDepartement(departement);
 
                         pegawais.add(pegawai);
