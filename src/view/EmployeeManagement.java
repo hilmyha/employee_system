@@ -53,6 +53,7 @@ public class EmployeeManagement extends JFrame {
     private JScrollPane hitungJscroll;
     private JButton clearButton1;
     private JButton clearButton2;
+    private JPanel header;
 
     private DepartementDao departementDao;
     private List<Departement> departements;

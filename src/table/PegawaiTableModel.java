@@ -16,8 +16,6 @@ public class PegawaiTableModel extends AbstractTableModel {
             "FIRST NAME",
             "LAST NAME",
             "DEPARTEMENT",
-//            "GAJI BERSIH",
-//            "TUNJANGAN"
     };
 
     public PegawaiTableModel(List<Pegawai> pegawais) {
@@ -41,8 +39,6 @@ public class PegawaiTableModel extends AbstractTableModel {
             case 1 -> pegawais.get(rowIndex).getFirst_name();
             case 2 -> pegawais.get(rowIndex).getLast_name();
             case 3 -> pegawais.get(rowIndex).getDepartement().getName();
-//            case 4 -> pegawais.get(rowIndex).getDepartement().getHonor();
-//            case 5 -> pegawais.get(rowIndex).getDepartement().getAllowance();
             default -> " ";
         };
     }
