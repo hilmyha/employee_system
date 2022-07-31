@@ -220,18 +220,6 @@ public class EmployeeManagement extends JFrame {
                }
            }
         });
-//        tableGaji.getSelectionModel().addListSelectionListener(e -> {
-//            if (!tableGaji.getSelectionModel().isSelectionEmpty()) {
-//                int selectedIndex = tableGaji.convertRowIndexToModel(tableGaji.getSelectedRow());
-//                hitungGajiPegawai = pegawais.get(selectedIndex);
-//                if (hitungGajiPegawai != null) {
-//                    searchId.setText(hitungGajiPegawai.getId_pegawai());
-//                    searchFirstName.setText(hitungGajiPegawai.getFirst_name());
-//                    searchLastName.setText(hitungGajiPegawai.getLast_name());
-//                    searchDept.setText(hitungGajiPegawai.getDepartement().getName());
-//                }
-//            }
-//        });
 
         absenButton.addActionListener(e -> {
             if (
