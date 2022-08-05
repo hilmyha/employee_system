@@ -53,6 +53,7 @@ public class EmployeeManagement extends JFrame {
     private JScrollPane hitungJscroll;
     private JButton clearButton1;
     private JButton clearButton2;
+    private JButton logoutButton;
     private JPanel header;
 
     private DepartementDao departementDao;
@@ -70,10 +71,6 @@ public class EmployeeManagement extends JFrame {
     private GajiTableModel gajiTableModel;
     private AbsensiTableModel absensiTableModel;
 
-//    public static void main(String[] args) {
-//        JFrame eMS = new EmployeeManagement();
-//        eMS.setVisible(true);
-//    }
 
     public EmployeeManagement() {
         super("Employee Management System");
@@ -268,6 +265,11 @@ public class EmployeeManagement extends JFrame {
         });
         clearButton1.addActionListener(e -> {
             clearHitungGaji();
+        });
+        logoutButton.addActionListener(e -> {
+            this.dispose();
+            JFrame Logout = new LoginForm();
+            Logout.setVisible(true);
         });
     }
 
